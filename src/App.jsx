@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import db from "./db/data.json";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [dataLeng, setDataLeng] = useState([]);
+  const [randomText, setRandomText] = useState("");
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * dataLeng.length);
+    setRandomText(dataLeng[randomIndex]?.text);
+  }, [dataLeng]);
+
+  const selectText = (event) => {
+    const selectedLanguage = event.target.value;
+    const filteredData = db.filter(
+      (phrase) => phrase.language === selectedLanguage
+    );
+
+    setDataLeng(filteredData);
+
+    const randomIndex = Math.floor(Math.random() * filteredData.length);
+    setRandomText(filteredData[randomIndex]?.text);
+  };
+
+  const printText = (e) => {
+    if (e.key === randomText.charAt(0)) {
+      console.log("Es la letra.");
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", printText);
+
+    return () => {
+      document.removeEventListener("keydown", printText);
+    };
+  }, [randomText]);
 
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Mecanografía App</h1>
+        <select onChange={selectText}>
+          <option value="es">ES</option>
+          <option value="fr">FR</option>
+          <option value="de">DE</option>
+          <option value="it">IT</option>
+          <option value="pt">PT</option>
+        </select>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div onKeyDown={printText} tabIndex="0">
+        <p>{randomText}</p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
-}
+  );
+};
 
-export default App
+export { App };
