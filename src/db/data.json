@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "language": "es",
+    "difficulty": 1,
+    "text": "¡Hola, ¿cómo estás?! Esta es una frase sencilla de nivel fácil."
+  },
+  {
+    "id": 2,
+    "language": "fr",
+    "difficulty": 2,
+    "text": "Bonjour! Comment ça va? La vie est belle."
+  },
+  {
+    "id": 3,
+    "language": "de",
+    "difficulty": 2,
+    "text": "Guten Morgen! Wie geht es dir? Heute ist ein neuer Tag."
+  },
+  {
+    "id": 4,
+    "language": "it",
+    "difficulty": 3,
+    "text": "Ciao! Come stai? La pizza italiana è deliziosa."
+  },
+  {
+    "id": 5,
+    "language": "pt",
+    "difficulty": 3,
+    "text": "Olá! Como vai? O Brasil é famoso por suas praias.l"
+  }
+]
